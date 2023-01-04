@@ -1,0 +1,25 @@
+{
+   "name": "school-node-sql",
+   "version": "1.0.0",
+   "description": "",
+   "main": "/api/index.js",
+   "scripts": {
+      "dev": "nodemon ./api/index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "body-parser": "^1.20.1",
+      "express": "^4.18.2",
+      "path": "^0.12.7",
+      "pg": "^8.8.0",
+      "pg-hstore": "^2.3.4",
+      "sequelize": "^6.28.0",
+      "sequelize-cli": "^6.5.2"
+   },
+   "devDependencies": {
+      "nodemon": "^2.0.20"
+   }
+}

@@ -2,7 +2,7 @@
 
 module.exports = {
    up: async (queryInterface, Sequelize) => {
-      await queryInterface.createTable("People", {
+      await queryInterface.createTable("Enrollments", {
          id: {
             allowNull: false,
             autoIncrement: true,
@@ -10,24 +10,27 @@ module.exports = {
             type: Sequelize.INTEGER,
          },
 
-         name: {
+         status: {
             allowNull: false,
             type: Sequelize.STRING,
          },
 
-         active: {
+         student_id: {
             allowNull: false,
-            type: Sequelize.BOOLEAN,
+            references: { model: "people", key: "id" },
+            type: Sequelize.INTEGER,
+
+            onUpdate: "CASCADE",
+            onDelete: "CASCADE",
          },
 
-         email: {
+         class_id: {
             allowNull: false,
-            type: Sequelize.STRING,
-         },
+            references: { model: "class", key: "id" },
+            type: Sequelize.INTEGER,
 
-         role: {
-            allowNull: false,
-            type: Sequelize.STRING,
+            onUpdate: "CASCADE",
+            onDelete: "CASCADE",
          },
 
          createdAt: {
@@ -41,8 +44,7 @@ module.exports = {
          },
       });
    },
-
    down: async (queryInterface, Sequelize) => {
-      await queryInterface.dropTable("People");
+      await queryInterface.dropTable("Enrollments");
    },
 };

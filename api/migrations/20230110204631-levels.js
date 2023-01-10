@@ -2,7 +2,7 @@
 
 module.exports = {
    up: async (queryInterface, Sequelize) => {
-      await queryInterface.createTable("People", {
+      await queryInterface.createTable("Levels", {
          id: {
             allowNull: false,
             autoIncrement: true,
@@ -10,22 +10,7 @@ module.exports = {
             type: Sequelize.INTEGER,
          },
 
-         name: {
-            allowNull: false,
-            type: Sequelize.STRING,
-         },
-
-         active: {
-            allowNull: false,
-            type: Sequelize.BOOLEAN,
-         },
-
-         email: {
-            allowNull: false,
-            type: Sequelize.STRING,
-         },
-
-         role: {
+         level_description: {
             allowNull: false,
             type: Sequelize.STRING,
          },
@@ -41,8 +26,7 @@ module.exports = {
          },
       });
    },
-
    down: async (queryInterface, Sequelize) => {
-      await queryInterface.dropTable("People");
+      await queryInterface.dropTable("Levels");
    },
 };

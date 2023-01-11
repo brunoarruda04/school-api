@@ -26,7 +26,7 @@ module.exports = {
 
          class_id: {
             allowNull: false,
-            references: { model: "Class", key: "id" },
+            references: { model: "Classes", key: "id" },
             type: Sequelize.INTEGER,
 
             onDelete: "CASCADE",

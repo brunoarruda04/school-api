@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize.js");
 
-const Class = sequelize.define("Class", {
+const Classes = sequelize.define("Classes", {
    start_date: DataTypes.DATEONLY,
 });
 
-module.exports = Class;
+module.exports = Classes;

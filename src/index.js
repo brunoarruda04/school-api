@@ -1,11 +1,11 @@
 const express = require("express");
-const routes = require("../api/routes/index");
+const { people, levels, classes } = require("../api/routes/index");
 
 require("../api/config/associations");
 
 const app = express();
 
 app.use(express.json());
-app.use(routes);
+app.use(people, levels, classes);
 
 app.listen(3000);

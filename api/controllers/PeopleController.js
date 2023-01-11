@@ -1,4 +1,5 @@
 const People = require("../models/people");
+const Enrollments = require("../models/enrollments");
 
 module.exports = {
    // LISTING ALL REGISTERED PEOPLE
@@ -23,8 +24,8 @@ module.exports = {
 
    // REGISTERING A NEW PERSON
    async registerPerson(req, res) {
+      const { name, active, email, role } = req.body;
       try {
-         const { name, active, email, role } = req.body;
          const person = await People.create({ name, active, email, role });
          return res.status(201).json(person);
       } catch (error) {
@@ -34,8 +35,8 @@ module.exports = {
 
    // UPDATING A PERSON
    async updatePerson(req, res) {
+      const { name, active, email, role } = req.body;
       try {
-         const { name, active, email, role } = req.body;
          await People.update(
             { name, active, email, role },
             {
@@ -56,6 +57,80 @@ module.exports = {
          await People.destroy({
             where: {
                id: req.params.id,
+            },
+         });
+         return res.status(200).send("Register removed succesfully.");
+      } catch (error) {
+         return res.status(500).json(error.message);
+      }
+   },
+
+   // PEOPLE X ENROLLMENTS METHODS
+   // LISTING ALL STUDENT'S ENROLLMENTS
+   async getStudentEnrollments(req, res) {
+      const { StudentId } = req.params;
+      try {
+         const enrollments = await Enrollments.findAll({
+            where: {
+               PersonId: StudentId,
+            },
+         });
+         return res.status(200).json(enrollments);
+      } catch (error) {
+         return res.status(500).json(error.message);
+      }
+   },
+
+   // LISTING A STUDENT'S ENROLLMENT BY ID
+   async getEnrollmentByStudent(req, res) {
+      const { StudentId, EnrollmentId } = req.params;
+      try {
+         const enrollment = await Enrollments.findOne({
+            where: {
+               id: Number(EnrollmentId),
+               PersonId: Number(StudentId),
+            },
+         });
+         return res.status(200).json(enrollment);
+      } catch (error) {
+         return res.status(500).json(error.message);
+      }
+   },
+
+   // REGISTERING A NEW ENROLLMENT
+   async registerEnrollment(req, res) {
+      const { StudentId } = req.params;
+      const enrollment = { ...req.body, PersonId: Number(StudentId) };
+      try {
+         const enrollments = await Enrollments.create(enrollment);
+         return res.status(201).json(enrollments);
+      } catch (error) {
+         return res.status(500).json(error.message);
+      }
+   },
+
+   // UPDATING A ENROLLMENT
+   async updateEnrollment(req, res) {
+      const { StudentId, EnrollmentId } = req.params;
+      const enrollment = { ...req.body, PersonId: StudentId };
+      try {
+         await Enrollments.update(enrollment, {
+            where: {
+               id: EnrollmentId,
+            },
+         });
+         return res.status(202).json("Register updated successfully.");
+      } catch (error) {
+         return res.status(500).json(error.message);
+      }
+   },
+
+   // REMOVING A ENROLLMENT
+   async removeEnrollment(req, res) {
+      try {
+         await Enrollments.destroy({
+            where: {
+               id: req.params.EnrollmentId,
             },
          });
          return res.status(200).send("Register removed succesfully.");

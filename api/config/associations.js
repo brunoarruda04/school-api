@@ -5,7 +5,7 @@ const Enrollments = require("../models/enrollments");
 
 // PEOPLE X ENROLLMENTS ASSOCIATION
 People.hasMany(Enrollments, { onDelete: "CASCADE", onUpdate: "CASCADE" });
-Enrollments.belongsTo(People, { foreignKey: "student_id", as: "People" });
+Enrollments.belongsTo(People, { foreignKey: "PersonId", as: "People" });
 
 // PEOPLE X CLASS ASSOCIATION
 People.hasMany(Classes, { onDelete: "CASCADE", onUpdate: "CASCADE" });
@@ -17,6 +17,6 @@ Classes.belongsTo(Levels, { foreignKey: "LevelId", as: "Levels" });
 
 // CLASS X ENROLLMENTS ASSOCIATION
 Classes.hasMany(Enrollments, { onDelete: "CASCADE", onUpdate: "CASCADE" });
-Enrollments.belongsTo(Classes, { foreignKey: "class_id", as: "Classes" });
+Enrollments.belongsTo(Classes, { foreignKey: "ClassId", as: "Classes" });
 
 module.exports = { People, Levels, Classes, Enrollments };

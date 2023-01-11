@@ -10,4 +10,10 @@ router.post("/classes/", ClassesController.registerClass);
 router.put("/classes/:id", ClassesController.updateClass);
 router.delete("/classes/:id", ClassesController.removeClass);
 
+// Classes x Enrollments Routes
+router.get("/classes/:ClassId/enrollments/", ClassesController.getStudentEnrollments);
+router.get("/classes/:ClassId/enrollments/:EnrollmentId", ClassesController.getEnrollmentByStudent);
+router.post("/classes/:ClassId/enrollments/", ClassesController.registerEnrollment);
+router.put("/classes/:ClassId/enrollments/:EnrollmentId", ClassesController.updateEnrollment);
+router.delete("/classes/:ClassId/enrollments/:EnrollmentId", ClassesController.removeEnrollment);
 module.exports = router;

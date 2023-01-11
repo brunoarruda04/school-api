@@ -15,7 +15,7 @@ module.exports = {
             type: Sequelize.STRING,
          },
 
-         student_id: {
+         PersonId: {
             allowNull: false,
             references: { model: "People", key: "id" },
             type: Sequelize.INTEGER,
@@ -24,7 +24,7 @@ module.exports = {
             onUpdate: "CASCADE",
          },
 
-         class_id: {
+         ClassId: {
             allowNull: false,
             references: { model: "Classes", key: "id" },
             type: Sequelize.INTEGER,

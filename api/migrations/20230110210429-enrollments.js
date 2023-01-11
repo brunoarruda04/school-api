@@ -19,18 +19,12 @@ module.exports = {
             allowNull: false,
             references: { model: "People", key: "id" },
             type: Sequelize.INTEGER,
-
-            onDelete: "CASCADE",
-            onUpdate: "CASCADE",
          },
 
          ClassId: {
             allowNull: false,
             references: { model: "Classes", key: "id" },
             type: Sequelize.INTEGER,
-
-            onDelete: "CASCADE",
-            onUpdate: "CASCADE",
          },
 
          createdAt: {

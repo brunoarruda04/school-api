@@ -12,11 +12,11 @@ module.exports = {
 
          teacher_id: {
             allowNull: false,
-            references: { model: "people", key: "id" },
+            references: { model: "People", key: "id" },
             type: Sequelize.INTEGER,
 
-            onUpdate: "CASCADE",
             onDelete: "CASCADE",
+            onUpdate: "CASCADE",
          },
 
          start_date: {
@@ -26,11 +26,11 @@ module.exports = {
 
          level_id: {
             allowNull: false,
-            references: { model: "levels", key: "id" },
+            references: { model: "Levels", key: "id" },
             type: Sequelize.INTEGER,
 
-            onUpdate: "CASCADE",
             onDelete: "CASCADE",
+            onUpdate: "CASCADE",
          },
 
          createdAt: {

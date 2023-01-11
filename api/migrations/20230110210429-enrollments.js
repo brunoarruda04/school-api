@@ -17,20 +17,20 @@ module.exports = {
 
          student_id: {
             allowNull: false,
-            references: { model: "people", key: "id" },
+            references: { model: "People", key: "id" },
             type: Sequelize.INTEGER,
 
-            onUpdate: "CASCADE",
             onDelete: "CASCADE",
+            onUpdate: "CASCADE",
          },
 
          class_id: {
             allowNull: false,
-            references: { model: "class", key: "id" },
+            references: { model: "Class", key: "id" },
             type: Sequelize.INTEGER,
 
-            onUpdate: "CASCADE",
             onDelete: "CASCADE",
+            onUpdate: "CASCADE",
          },
 
          createdAt: {

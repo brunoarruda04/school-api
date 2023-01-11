@@ -65,6 +65,20 @@ module.exports = {
       }
    },
 
+   async restorePerson(req, res) {
+      const { id } = req.params;
+      try {
+         await People.restore({
+            where: {
+               id: id,
+            },
+         });
+         return res.status(200).send("Person restored succesfully.");
+      } catch (error) {
+         return res.status(500).json(error.message);
+      }
+   },
+
    // PEOPLE X ENROLLMENTS METHODS
    // LISTING ALL STUDENT'S ENROLLMENTS
    async getStudentEnrollments(req, res) {

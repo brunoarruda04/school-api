@@ -74,13 +74,15 @@ module.exports = {
 
    // CLASSES X ENROLLMENTS METHODS
    // LISTING ALL CLASS'S ENROLLMENTS
-   async getStudentEnrollments(req, res) {
+   async getClassEnrollments(req, res) {
       const { ClassId } = req.params;
       try {
-         const enrollments = await Enrollments.findAll({
+         const enrollments = await Enrollments.findAndCountAll({
             where: {
                ClassId: ClassId,
+               status: "confirmed",
             },
+            order: [["createdAt", "DESC"]],
          });
          return res.status(200).json(enrollments);
       } catch (error) {
@@ -89,7 +91,7 @@ module.exports = {
    },
 
    // LISTING A CLASS'S ENROLLMENT BY ID
-   async getEnrollmentByStudent(req, res) {
+   async getClassEnrollmentById(req, res) {
       const { ClassId, EnrollmentId } = req.params;
       try {
          const enrollment = await Enrollments.findOne({

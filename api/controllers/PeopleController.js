@@ -1,6 +1,5 @@
 const People = require("../models/people");
 const Enrollments = require("../models/enrollments");
-const { database } = require("../config/config");
 
 module.exports = {
    // LISTING ALL REGISTERED PEOPLE
@@ -26,7 +25,7 @@ module.exports = {
    // LISTING A REGISTERED PERSON BY ID
    async getPersonById(req, res) {
       try {
-         const people = await People.findByPk(req.params.id);
+         const people = await People.scope("all").findByPk(req.params.id);
          return res.status(200).json(people);
       } catch (error) {
          return res.status(500).json(error.message);
@@ -48,7 +47,7 @@ module.exports = {
    async updatePerson(req, res) {
       const { name, active, email, role } = req.body;
       try {
-         await People.update(
+         await People.scope("all").update(
             { name, active, email, role },
             {
                where: {

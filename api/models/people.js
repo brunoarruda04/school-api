@@ -9,7 +9,19 @@ const People = sequelize.define(
       email: DataTypes.STRING,
       role: DataTypes.STRING,
    },
-   { paranoid: true }
+   {
+      paranoid: true,
+      defaultScope: {
+         where: {
+            active: true,
+         },
+      },
+      scopes: {
+         all: {
+            where: {},
+         },
+      },
+   }
 );
 
 module.exports = People;

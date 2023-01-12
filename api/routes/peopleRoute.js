@@ -4,7 +4,8 @@ const router = express.Router();
 const PeopleController = require("../controllers/PeopleController");
 
 // People Routes
-router.get("/people", PeopleController.getPeople);
+router.get("/people", PeopleController.getActivePeople);
+router.get("/people/all", PeopleController.getPeople);
 router.get("/people/:id", PeopleController.getPersonById);
 
 router.post("/people", PeopleController.registerPerson);

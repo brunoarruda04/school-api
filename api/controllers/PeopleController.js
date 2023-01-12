@@ -5,6 +5,16 @@ module.exports = {
    // LISTING ALL REGISTERED PEOPLE
    async getPeople(req, res) {
       try {
+         const people = await People.scope("all").findAll();
+         return res.status(200).json(people);
+      } catch (error) {
+         return res.status(500).json(error.message);
+      }
+   },
+
+   // LISTING ALL ACTIVE REGISTERED PEOPLE
+   async getActivePeople(req, res) {
+      try {
          const people = await People.findAll();
          return res.status(200).json(people);
       } catch (error) {

@@ -22,6 +22,24 @@ module.exports = {
       }
    },
 
+   // LISTING FULL CLASSES
+   async getFullClasses(req, res) {
+      const classLimit = 2;
+      try {
+         const fullClasses = await Enrollments.findAndCountAll({
+            where: {
+               status: "confirmed",
+            },
+            attributes: ["ClassId"],
+            group: ["ClassId"],
+            having: Sequelize.literal(`count('ClassId') >= ${classLimit}`),
+         });
+         return res.status(200).json(fullClasses);
+      } catch (error) {
+         return res.status(500).json(error.message);
+      }
+   },
+
    // LISTING A CLASS BY ID
    async getClassById(req, res) {
       try {

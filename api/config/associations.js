@@ -4,7 +4,7 @@ const Classes = require("../models/classes");
 const Enrollments = require("../models/enrollments");
 
 // PEOPLE X ENROLLMENTS ASSOCIATION
-People.hasMany(Enrollments);
+People.hasMany(Enrollments, { scope: { status: "confirmed" }, as: "classEnrollments" });
 Enrollments.belongsTo(People, { foreignKey: "PersonId", as: "People" });
 
 // PEOPLE X CLASS ASSOCIATION

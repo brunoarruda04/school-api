@@ -1,11 +1,21 @@
 const Classes = require("../models/classes");
 const Enrollments = require("../models/enrollments");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 module.exports = {
    // LISTING CLASSES
-   async getClass(req, res) {
+   async getClasses(req, res) {
+      // FILTERING BY DATE IF QUERY EXISTS
+      const { initial_date, end_date } = req.query;
+      const where = {};
+
+      initial_date || end_date ? (where.start_date = {}) : null;
+      initial_date ? (where.start_date[Op.gte] = initial_date) : null;
+      end_date ? (where.start_date[Op.lte] = end_date) : null;
+
       try {
-         const classes = await Classes.findAll();
+         const classes = await Classes.findAll({ where });
          return res.status(200).json(classes);
       } catch (error) {
          return res.status(500).json(error.message);

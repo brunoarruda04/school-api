@@ -1,5 +1,6 @@
 const People = require("../models/people");
 const Enrollments = require("../models/enrollments");
+const { database } = require("../config/config");
 
 module.exports = {
    // LISTING ALL REGISTERED PEOPLE
@@ -75,6 +76,7 @@ module.exports = {
       }
    },
 
+   // RESTORE A DELETED PERSON
    async restorePerson(req, res) {
       const { id } = req.params;
       try {
@@ -94,11 +96,12 @@ module.exports = {
    async getStudentEnrollments(req, res) {
       const { StudentId } = req.params;
       try {
-         const enrollments = await Enrollments.findAll({
+         const person = await People.findOne({
             where: {
-               PersonId: StudentId,
+               id: StudentId,
             },
          });
+         const enrollments = await person.getClassEnrollments();
          return res.status(200).json(enrollments);
       } catch (error) {
          return res.status(500).json(error.message);
